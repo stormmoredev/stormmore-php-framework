@@ -1,0 +1,15 @@
+services:
+  web:
+    build:
+      context: .
+      target: storm
+    ports:
+      - "8080:80"
+    develop:
+      watch:
+        - action: sync
+          path: ./
+          target: /usr/storm/
+          ignore:
+            - .idea
+            - .git
