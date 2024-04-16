@@ -8,9 +8,12 @@ RUN apk add icu-data-full
 RUN docker-php-ext-configure intl
 RUN docker-php-ext-install intl
 
+#curl
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
 FROM storm-base as storm
 WORKDIR /usr/storm
-COPY storm.php /usr/local/lib/php/storm.php
+COPY stormmore.php /usr/local/lib/php/stormmore.php
 COPY src/ /usr/storm/src
 COPY server/ /usr/storm/server
 CMD php -S 0.0.0.0:80 -t /usr/storm/server
